@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export async function POST(request: Request) {
+export async function POST(request : { json: () => any }) {
   try {
     const body = await request.json()
     const { user_id,items, total } = body

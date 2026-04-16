@@ -4,22 +4,20 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: { json: () => any }, { params }: any) {
   try {
+    const { id } = params
     const body = await request.json()
     const { name, description, price, stock, imageUrl } = body
     
     const product = await prisma.product.update({
-      where: { id: parseInt(params.id) },
-      data: {
-        name,
-        description,
-        price: parseFloat(price),
-        stock: parseInt(stock),
-        imageUrl
+      where: { id: parseInt(id) },
+      data: { 
+        name, 
+        description, 
+        price: parseFloat(price), 
+        stock: parseInt(stock), 
+        imageUrl 
       }
     })
     return NextResponse.json(product)
@@ -31,13 +29,11 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(request: any, { params }: any) {
   try {
-    await prisma.product.delete({
-      where: { id: parseInt(params.id) }
+    const { id } = params
+    await prisma.product.delete({ 
+      where: { id: parseInt(id) } 
     })
     return NextResponse.json({ message: 'Producto eliminado' })
   } catch (error) {
