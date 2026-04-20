@@ -19,8 +19,13 @@ export async function GET() {
 
     return NextResponse.json(formattedProducts)
   } catch (error) {
-    return NextResponse.json(
+    /*return NextResponse.json(
       { error: 'Error al obtener productos' },
+      { status: 500 }
+    )*/
+    console.error('Error en /api/products:', error)
+    return Response.json(
+      { error: String(error) },
       { status: 500 }
     )
   }
