@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 //import { PrismaClient } from '@/generated/prisma/client';
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export async function POST(request : { json: () => any }) {
+export async function POST(request : NextRequest) {
   try {
     const body = await request.json()
     const { user_id,items, total } = body
@@ -27,6 +27,7 @@ export async function POST(request : { json: () => any }) {
     
     return NextResponse.json(order, { status: 201 })
   } catch (error) {
+    console.error('Error al crear pedido:', error)
     return NextResponse.json(
       { error: 'Error al crear pedido' },
       { status: 500 }
