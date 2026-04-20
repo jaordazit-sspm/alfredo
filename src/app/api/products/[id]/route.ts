@@ -22,8 +22,13 @@ export async function PUT(request: { json: () => any }, { params }: any) {
     })
     return NextResponse.json(product)
   } catch (error) {
-    return NextResponse.json(
+    /*return NextResponse.json(
       { error: 'Error al actualizar producto' },
+      { status: 500 }
+    )*/
+    console.error('Error en update /api/products:', error)
+    return Response.json(
+      { error: String(error) },
       { status: 500 }
     )
   }
@@ -37,8 +42,13 @@ export async function DELETE(request: any, { params }: any) {
     })
     return NextResponse.json({ message: 'Producto eliminado' })
   } catch (error) {
-    return NextResponse.json(
+    /*return NextResponse.json(
       { error: 'Error al eliminar producto' },
+      { status: 500 }
+    )*/
+    console.error('Error en delete /api/products:', error)
+    return Response.json(
+      { error: String(error) },
       { status: 500 }
     )
   }

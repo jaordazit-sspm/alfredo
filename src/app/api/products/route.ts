@@ -23,7 +23,7 @@ export async function GET() {
       { error: 'Error al obtener productos' },
       { status: 500 }
     )*/
-    console.error('Error en /api/products:', error)
+    console.error('Error en select /api/products:', error)
     return Response.json(
       { error: String(error) },
       { status: 500 }
@@ -58,9 +58,14 @@ export async function POST(request: Request) {
       stock: Number(product.stock)
     }, { status: 201 })
   } catch (error) {
-    console.error('Error:', error)
+    /*console.error('Error:', error)
     return NextResponse.json(
       { error: 'Error al crear producto' },
+      { status: 500 }
+    )*/
+    console.error('Error en insert /api/products:', error)
+    return Response.json(
+      { error: String(error) },
       { status: 500 }
     )
   }
