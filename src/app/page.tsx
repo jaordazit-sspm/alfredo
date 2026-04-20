@@ -12,8 +12,8 @@ interface Product {
   price: number
   stock: number
   imageUrl: string | null
-  createdAt?: string
-  updatedAt?: string
+  created_at?: string
+  updated_at?: string
 }
 
 interface CartItem extends Product {
